@@ -1,0 +1,44 @@
+corrosion is made by Titanium Network. I built this resprotory so you dont have to set it up.
+
+
+commands:
+
+npm i corrosion
+
+root@corrosion:~$ openssl req -nodes -new -x509 -keyout ssl.key -out ssl.cert
+
+
+example if things are working:
+
+root@corrosion:~$ node index.js &; cpid=$!
+root@corrosion:~$ curl -k "https://localhost:8443/get/hvtrs8%2F-ezaopne%2Ccmm" 
+<html>
+<head>
+    <title>Example Domain</title>
+...
+user@corrosion:~$ kill $cpid
+
+-----------------------------------------------
+
+PM2:
+
+root@corrosion:~$ npm i pm2 -g
+root@corrosion:~$ pm2 start index.js
+root@corrosion:~$ pm2 startup
+root@corrosion:~$ pm2 save
+
+-----------------------------------------------
+
+Nginx Setup:
+
+root@corrosion:~$ apt install -y nginx python3 python3-venv libaugeas0
+root@corrosion:~$ python3 -m venv /opt/certbot/
+root@corrosion:~$ /opt/certbot/bin/pip install --upgrade pip
+root@corrosion:~$ /opt/certbot/bin/pip install certbot certbot-nginx
+root@corrosion:~$ ln -s /opt/certbot/bin/certbot /usr/bin/certbot
+
+
+Encryption:
+
+root@corrosion:~$ certbot --nginx -d <your domain>
+root@corrosion:~$ systemctl restart nginx
